@@ -1,0 +1,15 @@
+{
+  "name": "@agent-guardian/audit",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Append-only audit trail with secret detection",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "dependencies": {
+    "@agent-guardian/domain": "*"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@agent-guardian/domain",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pure domain types and type guards — zero runtime dependencies",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --build"
+  }
+}

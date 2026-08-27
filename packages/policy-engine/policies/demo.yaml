@@ -1,0 +1,53 @@
+# ─── Demo Policy ──────────────────────────────────────────────
+# Relaxed policy variant for demo and development use.
+# Still blocks destructive production operations.
+
+rules:
+  # ── Critical: still block production deletes even in demo ──
+  - id: block-production-destructive
+    name: Block Production Destructive Operations
+    description: Production delete/destructive operations are never allowed
+    priority: 100
+    conditions:
+      operations: [delete]
+      environments: [production]
+    decision:
+      riskLevel: critical
+      allowed: false
+      requiresApproval: false
+
+  # ── Allow production deploys without approval (demo only) ──
+  - id: production-deploy-demo
+    name: Production Deploy Allowed (Demo)
+    description: Production deploy allowed without approval in demo mode
+    priority: 90
+    conditions:
+      operations: [deploy, rollback, restart]
+      environments: [production]
+    decision:
+      riskLevel: high
+      allowed: true
+      requiresApproval: false
+
+  # ── Allow all non-destructive operations ───────────────────
+  - id: all-non-destructive
+    name: All Non-Destructive Allowed
+    description: All non-destructive operations allowed in demo mode
+    priority: 50
+    conditions:
+      operations: [read, write, execute, deploy, rollback, restart]
+    decision:
+      riskLevel: low
+      allowed: true
+      requiresApproval: false
+
+  # ── Catch-all: block everything else ───────────────────────
+  - id: catch-all-block
+    name: Catch-All Block
+    description: Any action not explicitly permitted is blocked (fail closed)
+    priority: 0
+    conditions: {}
+    decision:
+      riskLevel: critical
+      allowed: false
+      requiresApproval: false

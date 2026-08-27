@@ -1,0 +1,16 @@
+{
+  "name": "@agent-guardian/kill-switch",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Kill switch state machine with idempotent stop and audit integration",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "dependencies": {
+    "@agent-guardian/domain": "*",
+    "@agent-guardian/audit": "*"
+  }
+}

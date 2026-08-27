@@ -1,12 +1,22 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "outDir": "dist",
-    "rootDir": "src"
-  },
-  "include": ["src"],
-  "references": [
-    { "path": "../domain" },
-    { "path": "../audit" }
-  ]
+    "extends":  "../../tsconfig.base.json",
+    "compilerOptions":  {
+                            "outDir":  "dist",
+                            "rootDir":  "src",
+                            "composite":  true
+                        },
+    "include":  [
+                    "src"
+                ],
+    "references":  [
+                       {
+                           "path":  "../domain"
+                       },
+                       {
+                           "path":  "../audit"
+                       }
+                   ],
+    "exclude":  [
+                    "src/__tests__"
+                ]
 }

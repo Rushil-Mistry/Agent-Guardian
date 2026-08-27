@@ -10,7 +10,7 @@
     "build": "tsc --build"
   },
   "dependencies": {
-    "@agent-guardian/domain": "*",
-    "@agent-guardian/audit": "*"
+    "@agent-guardian/domain": "workspace:*",
+    "@agent-guardian/audit": "workspace:*"
   }
 }

@@ -1,0 +1,23 @@
+{
+  "name": "agent-guardian",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Autonomous SRE incident-response agent — safety & domain layer",
+  "workspaces": [
+    "packages/domain",
+    "packages/policy-engine",
+    "packages/audit",
+    "packages/kill-switch"
+  ],
+  "scripts": {
+    "build": "tsc --build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "tsc --build --clean"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0",
+    "@types/node": "^20.14.0"
+  }
+}

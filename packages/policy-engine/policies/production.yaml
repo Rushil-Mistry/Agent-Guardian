@@ -1,0 +1,77 @@
+# ─── Production Policy ────────────────────────────────────────
+# Stricter policy variant — all production operations require approval.
+
+rules:
+  # ── Critical: block all destructive operations in production
+  - id: block-production-destructive
+    name: Block Production Destructive Operations
+    description: Production delete/destructive operations are never allowed
+    priority: 100
+    conditions:
+      operations: [delete]
+      environments: [production]
+    decision:
+      riskLevel: critical
+      allowed: false
+      requiresApproval: false
+
+  # ── High: ALL production operations need approval ──────────
+  - id: production-all-approval
+    name: All Production Operations Require Approval
+    description: Every production operation requires human approval
+    priority: 90
+    conditions:
+      environments: [production]
+    decision:
+      riskLevel: high
+      allowed: true
+      requiresApproval: true
+
+  # ── Medium: staging deploy/rollback/restart need approval ──
+  - id: staging-deploy-approval
+    name: Staging Deploy Requires Approval
+    description: Staging deploy, rollback, and restart require human approval
+    priority: 80
+    conditions:
+      operations: [deploy, rollback, restart]
+      environments: [staging]
+    decision:
+      riskLevel: medium
+      allowed: true
+      requiresApproval: true
+
+  # ── Low: read-only allowed everywhere ──────────────────────
+  - id: read-only-allowed
+    name: Read-Only Operations Allowed
+    description: Read-only operations are always allowed without approval
+    priority: 60
+    conditions:
+      operations: [read]
+    decision:
+      riskLevel: low
+      allowed: true
+      requiresApproval: false
+
+  # ── Low: sandbox operations allowed ────────────────────────
+  - id: sandbox-general
+    name: Sandbox General Operations
+    description: Non-destructive sandbox operations are allowed
+    priority: 50
+    conditions:
+      operations: [read, write, execute, deploy, rollback, restart]
+      environments: [sandbox]
+    decision:
+      riskLevel: low
+      allowed: true
+      requiresApproval: false
+
+  # ── Catch-all: block everything else ───────────────────────
+  - id: catch-all-block
+    name: Catch-All Block
+    description: Any action not explicitly permitted is blocked (fail closed)
+    priority: 0
+    conditions: {}
+    decision:
+      riskLevel: critical
+      allowed: false
+      requiresApproval: false

@@ -1,0 +1,106 @@
+# ─── Default Policy ───────────────────────────────────────────
+# Standard policy rules for Agent Guardian.
+# Rules are evaluated in priority order (highest first).
+# The catch-all rule at the bottom ensures fail-closed behavior.
+
+rules:
+  # ── Critical: block destructive production operations ──────
+  - id: block-production-destructive
+    name: Block Production Destructive Operations
+    description: Production delete/destructive operations are never allowed
+    priority: 100
+    conditions:
+      operations: [delete]
+      environments: [production]
+    decision:
+      riskLevel: critical
+      allowed: false
+      requiresApproval: false
+
+  # ── High: production deploy/rollback/restart need approval ─
+  - id: production-deploy-approval
+    name: Production Deploy Requires Approval
+    description: Production deploy, rollback, and restart require human approval
+    priority: 90
+    conditions:
+      operations: [deploy, rollback, restart]
+      environments: [production]
+    decision:
+      riskLevel: high
+      allowed: true
+      requiresApproval: true
+
+  # ── High: production write needs approval ──────────────────
+  - id: production-write-approval
+    name: Production Write Requires Approval
+    description: Production write operations require human approval
+    priority: 85
+    conditions:
+      operations: [write]
+      environments: [production]
+    decision:
+      riskLevel: high
+      allowed: true
+      requiresApproval: true
+
+  # ── Medium: sandbox execution allowed ──────────────────────
+  - id: sandbox-execution
+    name: Sandbox Execution Allowed
+    description: Code execution in sandbox environments is allowed without approval
+    priority: 80
+    conditions:
+      operations: [execute]
+      environments: [sandbox]
+    decision:
+      riskLevel: medium
+      allowed: true
+      requiresApproval: false
+
+  # ── Medium: staging operations allowed ─────────────────────
+  - id: staging-operations
+    name: Staging Operations Allowed
+    description: Non-destructive staging operations are allowed without approval
+    priority: 70
+    conditions:
+      operations: [read, write, execute, deploy, rollback, restart]
+      environments: [staging]
+    decision:
+      riskLevel: medium
+      allowed: true
+      requiresApproval: false
+
+  # ── Low: read-only tools allowed everywhere ────────────────
+  - id: read-only-allowed
+    name: Read-Only Operations Allowed
+    description: Read-only operations are always allowed without approval
+    priority: 60
+    conditions:
+      operations: [read]
+    decision:
+      riskLevel: low
+      allowed: true
+      requiresApproval: false
+
+  # ── Low: sandbox non-destructive operations ────────────────
+  - id: sandbox-general
+    name: Sandbox General Operations
+    description: Non-destructive sandbox operations are allowed
+    priority: 50
+    conditions:
+      operations: [read, write, execute, deploy, rollback, restart]
+      environments: [sandbox]
+    decision:
+      riskLevel: low
+      allowed: true
+      requiresApproval: false
+
+  # ── Catch-all: block everything else (fail closed) ─────────
+  - id: catch-all-block
+    name: Catch-All Block
+    description: Any action not explicitly permitted is blocked (fail closed)
+    priority: 0
+    conditions: {}
+    decision:
+      riskLevel: critical
+      allowed: false
+      requiresApproval: false

@@ -10,7 +10,7 @@
     "build": "tsc --build"
   },
   "dependencies": {
-    "@agent-guardian/domain": "*",
+    "@agent-guardian/domain": "workspace:*",
     "js-yaml": "^4.1.0"
   },
   "devDependencies": {

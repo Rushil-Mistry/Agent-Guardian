@@ -4,6 +4,13 @@
     { "path": "packages/domain" },
     { "path": "packages/policy-engine" },
     { "path": "packages/audit" },
-    { "path": "packages/kill-switch" }
+    { "path": "packages/kill-switch" },
+    { "path": "packages/shared" },
+    { "path": "packages/mcp/monitoring" },
+    { "path": "packages/mcp/logs" },
+    { "path": "packages/mcp/github" },
+    { "path": "packages/mcp/database" },
+    { "path": "packages/mcp/deployment" }
   ]
+
 }

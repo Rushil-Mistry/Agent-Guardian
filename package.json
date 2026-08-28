@@ -1,23 +1,24 @@
 {
   "name": "agent-guardian",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
-  "description": "Autonomous SRE incident-response agent — safety & domain layer",
-  "workspaces": [
-    "packages/domain",
-    "packages/policy-engine",
-    "packages/audit",
-    "packages/kill-switch"
-  ],
+  "description": "Modular autonomous incident-response agent",
+  "type": "module",
   "scripts": {
-    "build": "tsc --build",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "clean": "tsc --build --clean"
+    "build": "pnpm -r build",
+    "dev:monitoring": "pnpm --filter @agent-guardian/mcp-monitoring dev",
+    "dev:logs": "pnpm --filter @agent-guardian/mcp-logs dev",
+    "dev:github": "pnpm --filter @agent-guardian/mcp-github dev",
+    "dev:database": "pnpm --filter @agent-guardian/mcp-database dev",
+    "dev:deployment": "pnpm --filter @agent-guardian/mcp-deployment dev",
+    "dev:all-mcp": "pnpm -r --filter '@agent-guardian/mcp-*' dev",
+    "clean": "pnpm -r exec rm -rf dist"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "typescript": "^5.5.0",
-    "vitest": "^2.0.0",
-    "@types/node": "^20.14.0"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11"
   }
 }

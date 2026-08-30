@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "agent-guardian",
   "version": "1.0.0",
   "private": true,
@@ -15,6 +15,7 @@
     "dev:deployment": "pnpm --filter @agent-guardian/mcp-deployment dev",
     "dev:all-mcp": "pnpm -r --parallel --filter \"./packages/mcp/*\" dev",
     "dev:agent": "pnpm --filter @agent-guardian/agent-runner dev",
+    "dev:dashboard": "pnpm --filter @agent-guardian/dashboard dev",
     "simulate": "pnpm --filter @agent-guardian/agent-runner simulate",
     "clean": "pnpm -r exec rm -rf dist"
   },

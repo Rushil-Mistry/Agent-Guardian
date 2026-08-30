@@ -1,0 +1,27 @@
+﻿{
+  "name": "@agent-guardian/dashboard",
+  "version": "1.0.0",
+  "description": "Agent Guardian Incident Command Center",
+  "type": "module",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/server.ts",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "@agent-guardian/audit": "workspace:*",
+    "@agent-guardian/domain": "workspace:*",
+    "@agent-guardian/kill-switch": "workspace:*",
+    "@agent-guardian/policy-engine": "workspace:*",
+    "@agent-guardian/shared": "workspace:*",
+    "express": "^5.1.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/ws": "^8.18.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.9.3"
+  }
+}

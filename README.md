@@ -2,6 +2,12 @@
 
 > **Autonomous SRE Incident-Response Agent built on [TrueForge](https://github.com/truefoundry/trueforge) with [Qodo](https://www.qodo.ai/) Code Integrity.**
 
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue.svg)](https://www.typescriptlang.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688.svg)](https://fastapi.tiangolo.com/)
+[![MCP](https://img.shields.io/badge/Protocol-Model%20Context%20Protocol-orange.svg)](https://modelcontextprotocol.io/)
+[![Vitest](https://img.shields.io/badge/Tested%20with-Vitest-yellow.svg)](https://vitest.dev/)
+[![License: ISC](https://img.shields.io/badge/License-ISC-green.svg)](https://opensource.org/licenses/ISC)
+
 Agent Guardian investigates production incidents, gathers evidence through the **Model Context Protocol (MCP)**, reproduces regressions inside **TrueForge sandboxes**, enforces **deterministic safety policies**, and requires **human approval** before executing consequential production actions.
 
 ---

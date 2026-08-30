@@ -1,6 +1,8 @@
 name: Qodo Code Review & Integrity
 
 on:
+  push:
+    branches: [main]
   pull_request:
     types: [opened, reopened, synchronize]
   issue_comment:
@@ -12,7 +14,7 @@ permissions:
   issues: write
 
 jobs:
-  qodo_review:
+  build_and_test:
     runs-on: ubuntu-latest
     if: ${{ github.event.sender.type != 'Bot' }}
     steps:
@@ -38,6 +40,13 @@ jobs:
 
       - name: Run Vitest Unit Tests
         run: pnpm test
+
+  qodo_review:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' || github.event_name == 'issue_comment' }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
       - name: Qodo Merge Automated Review
         uses: Codium-ai/pr-agent@main

@@ -8,39 +8,7 @@ Agent Guardian investigates production incidents, gathers evidence through the *
 
 ## 🌟 Architecture Overview
 
-```mermaid
-flowchart TD
-    subgraph Observability ["🔍 Detection & Triage"]
-        Alert["🚨 Prometheus / Monitoring Alert"] --> TF_Runner["🤖 TrueForge Agent Runner"]
-    end
-
-    subgraph TrueForge ["⚡ TrueForge Agent Harness"]
-        TF_Runner --> Orchestrator["SRE Incident Orchestrator"]
-        Orchestrator --> Sandbox["🧪 Isolated Sandbox Runtime\n(Diagnostic & Repro Execution)"]
-        Orchestrator --> ToolRouter["MCP Tool Router"]
-    end
-
-    subgraph MCPSuite ["🔌 Model Context Protocol (MCP) Servers"]
-        ToolRouter --> MCP_Mon["📊 Monitoring MCP (Port 3001)"]
-        ToolRouter --> MCP_Logs["📜 Logs MCP (Port 3002)"]
-        ToolRouter --> MCP_Git["🌿 GitHub MCP (Port 3003)"]
-        ToolRouter --> MCP_DB["🗄️ Database MCP (Port 3004)"]
-        ToolRouter --> MCP_Deploy["🚀 Deployment MCP (Port 3005)"]
-    end
-
-    subgraph SafetyDomain ["🛡️ Deterministic Safety Layer"]
-        Orchestrator --> PolicyEngine["⚖️ Policy Engine (Fail-Closed)"]
-        PolicyEngine --> RiskEngine["📈 Risk Classifier (Low / Med / High / Critical)"]
-        PolicyEngine --> KillSwitch["🛑 Idempotent Kill Switch & State Machine"]
-        PolicyEngine --> AuditLog["🔒 Append-Only Audit Trail (Secret Redacted)"]
-    end
-
-    subgraph HITL ["👤 Human-in-the-Loop Governance"]
-        RiskEngine -->|"High Risk Decision"| Gate["⏸️ WAITING_APPROVAL State"]
-        Gate --> Operator["👷 SRE On-Call Approval"]
-        Operator -->|"Approved"| MCP_Deploy
-    end
-```
+![Agent Guardian Architecture](docs/images/architecture.jpg)
 
 ---
 

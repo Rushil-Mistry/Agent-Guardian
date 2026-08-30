@@ -14,12 +14,15 @@
     "dev:database": "pnpm --filter @agent-guardian/mcp-database dev",
     "dev:deployment": "pnpm --filter @agent-guardian/mcp-deployment dev",
     "dev:all-mcp": "pnpm -r --parallel --filter \"./packages/mcp/*\" dev",
+    "dev:agent": "pnpm --filter @agent-guardian/agent-runner dev",
+    "simulate": "pnpm --filter @agent-guardian/agent-runner simulate",
     "clean": "pnpm -r exec rm -rf dist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^22.20.1",
     "typescript": "^5.9.3",
     "vitest": "^4.1.11"
   }

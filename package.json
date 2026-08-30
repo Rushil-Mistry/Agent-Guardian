@@ -12,6 +12,10 @@
     "dev:database": "pnpm --filter @agent-guardian/mcp-database dev",
     "dev:deployment": "pnpm --filter @agent-guardian/mcp-deployment dev",
     "dev:all-mcp": "pnpm -r --filter '@agent-guardian/mcp-*' dev",
+    "dev:agent": "pnpm --filter @agent-guardian/agent-runner dev",
+    "simulate": "pnpm --filter @agent-guardian/agent-runner simulate",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "clean": "pnpm -r exec rm -rf dist"
   },
   "keywords": [],

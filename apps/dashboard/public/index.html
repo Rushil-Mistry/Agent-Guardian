@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Guardian — Autonomous AI Incident Manager</title>
+  <meta name="description" content="An autonomous AI safety system that detects problems, finds root causes, and safely prepares fixes with human oversight.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ═══ TOP BAR ═══ -->
+  <header id="topbar">
+    <div class="topbar-left">
+      <div class="logo">
+        <span class="logo-badge">AI SRE</span>
+        <div class="logo-titles">
+          <span class="logo-text">Agent Guardian</span>
+          <span class="logo-sub">Autonomous Incident Response & Safety Shield</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="topbar-center">
+      <!-- Live Storyline Pill -->
+      <div class="storyline-pill" id="storyline-pill">
+        <span class="live-pulse"></span>
+        <span id="storyline-text">System Normal — Monitoring Checkout & Payments</span>
+      </div>
+    </div>
+
+    <div class="topbar-right">
+      <div class="mode-toggle-wrap">
+        <span class="toggle-label">Simple English</span>
+        <label class="switch">
+          <input type="checkbox" id="toggle-tech-mode" checked>
+          <span class="slider round"></span>
+        </label>
+        <span class="toggle-label">Developer</span>
+      </div>
+
+      <button id="btn-killswitch" class="btn-kill" title="Instantly stops the AI agent from taking any further actions">
+        <span class="kill-icon">⛔</span> EMERGENCY STOP
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══ MAIN THREE-COLUMN GRID ═══ -->
+  <main id="main-grid">
+
+    <!-- ─── LEFT PANEL: System Health & Real-World Impact ─── -->
+    <aside id="panel-left">
+
+      <!-- Customer Impact Card -->
+      <section class="card" id="impact-card">
+        <div class="card-header">
+          <span class="card-emoji">🏪</span>
+          <div>
+            <h2 class="card-title">Customer Store Status</h2>
+            <p class="card-sub">Online Payment Service</p>
+          </div>
+        </div>
+
+        <div class="status-hero" id="status-hero">
+          <div class="status-indicator-ring healthy" id="status-ring">
+            <span class="status-icon" id="status-hero-icon">✅</span>
+          </div>
+          <div class="status-hero-text">
+            <div class="hero-main" id="hero-status-title">All Systems Normal</div>
+            <div class="hero-desc" id="hero-status-desc">Customers are checking out smoothly with no errors.</div>
+          </div>
+        </div>
+
+        <!-- Human Metrics Grid -->
+        <div class="metrics-grid">
+          <div class="metric-box">
+            <span class="metric-label">Failed Payments</span>
+            <span class="metric-val highlight" id="h-error-rate">0.0%</span>
+            <span class="metric-sub" id="h-error-sub">Target: &lt; 1%</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label">Customer Speed</span>
+            <span class="metric-val" id="h-latency">145ms</span>
+            <span class="metric-sub">Fast response</span>
+          </div>
+        </div>
+
+        <!-- Visual Impact Bar -->
+        <div class="impact-bar-wrap">
+          <div class="impact-bar-header">
+            <span>Checkout Reliability</span>
+            <span id="reliability-pct">100% Operational</span>
+          </div>
+          <div class="impact-progress-track">
+            <div class="impact-progress-fill healthy" id="impact-bar-fill"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Live Alerts in Plain English -->
+      <section class="card" id="alerts-card">
+        <div class="card-header">
+          <span class="card-emoji">🔔</span>
+          <div>
+            <h2 class="card-title">What’s Happening</h2>
+            <p class="card-sub">Real-time system events</p>
+          </div>
+        </div>
+        <div id="alerts-list" class="alerts-list">
+          <div class="empty-state">
+            <span class="empty-icon">🛡️</span>
+            <span>No issues detected. Everything is running smoothly.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Safety Guarantee Card -->
+      <section class="card safety-card">
+        <div class="card-header">
+          <span class="card-emoji">🔒</span>
+          <div>
+            <h2 class="card-title">Zero-Risk AI Guarantee</h2>
+            <p class="card-sub">3-Layer Safety Architecture</p>
+          </div>
+        </div>
+        <ul class="safety-points">
+          <li><strong>Read-Only by Default:</strong> The AI can only look, not modify.</li>
+          <li><strong>Isolated Sandbox:</strong> Fixes are tested in a private simulation room.</li>
+          <li><strong>Human Approval Gate:</strong> The AI cannot deploy changes without human sign-off.</li>
+        </ul>
+      </section>
+
+    </aside>
+
+    <!-- ─── CENTER PANEL: The 8-Step Storyboard ─── -->
+    <section id="panel-center">
+      <div class="center-banner">
+        <div>
+          <h2 class="center-heading">Autonomous Incident Resolution Flow</h2>
+          <p class="center-sub">Watch the AI detect, investigate, safely test, and resolve problems step-by-step.</p>
+        </div>
+        <div class="workflow-badge idle" id="workflow-status-pill">System Ready</div>
+      </div>
+
+      <!-- 8-Step Timeline Stepper -->
+      <div id="stepper" class="stepper">
+        <!-- Injected via JavaScript with Plain English by default -->
+      </div>
+
+      <!-- Interactive Human Approval Modal -->
+      <div id="approval-overlay" class="approval-overlay hidden">
+        <div class="approval-modal">
+          <div class="modal-badge-row">
+            <span class="modal-shield-tag">🛡️ SAFETY CHECKPOINT</span>
+            <span class="modal-risk-pill critical" id="approval-risk">HIGH IMPORTANCE</span>
+          </div>
+
+          <h3 class="modal-title">AI Needs Your Approval to Apply the Fix</h3>
+          <p class="modal-desc">The AI investigated the checkout crash, created a solution, and proved that it works safely in isolation. It will <strong>NOT</strong> touch your live store until you say yes.</p>
+
+          <!-- 3-Column Summary Cards -->
+          <div class="approval-summary-grid">
+            <div class="summary-card problem">
+              <span class="sc-icon">🚨</span>
+              <h4>The Problem</h4>
+              <p id="appr-problem-text">A recent update caused mobile checkouts to crash when payment method was blank.</p>
+            </div>
+            <div class="summary-card solution">
+              <span class="sc-icon">💡</span>
+              <h4>The AI's Fix</h4>
+              <p id="appr-solution-text">Restored validation check to safely handle mobile payments without crashing.</p>
+            </div>
+            <div class="summary-card test">
+              <span class="sc-icon">🧪</span>
+              <h4>Test Result</h4>
+              <p id="appr-test-text">100% tests passed in private sandbox. Zero real customers were affected.</p>
+            </div>
+          </div>
+
+          <!-- Developer Diff Accordion (Visible in Dev Mode or Expandable) -->
+          <details class="tech-accordion" id="diff-accordion">
+            <summary class="tech-summary">View Code Changes (For Developers)</summary>
+            <div class="tech-details-body">
+              <div class="code-header">
+                <span>File: <code>apps/demo-service/main.py</code></span>
+                <span class="diff-tag">v1.41 ➔ v1.42 Fix</span>
+              </div>
+              <pre id="approval-diff" class="diff-block"></pre>
+            </div>
+          </details>
+
+          <!-- Action Buttons -->
+          <div class="modal-actions">
+            <button id="btn-approve" class="btn-modal approve">
+              <span class="btn-check">✅</span> Yes, Apply Fix to Live Store
+            </button>
+            <button id="btn-reject" class="btn-modal reject">
+              <span class="btn-cross">❌</span> Do Not Apply (Cancel)
+            </button>
+          </div>
+          <div class="modal-footer-note">
+            🛡️ Protected by Policy Engine: Rules ensure no action is taken without explicit human authorization.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── RIGHT PANEL: Evidence & AI Thinking ─── -->
+    <aside id="panel-right">
+      <div class="panel-tab-header">
+        <button class="tab-btn active" data-tab="story">📋 What AI Discovered</button>
+        <button class="tab-btn" data-tab="audit">📜 Safety Audit Trail</button>
+      </div>
+
+      <!-- Plain English Evidence Tab -->
+      <div id="tab-story" class="tab-content active">
+        <div id="evidence-feed" class="feed-container">
+          <div class="empty-state">
+            <span class="empty-icon">🔍</span>
+            <span>When an incident occurs, the AI will document every piece of evidence it finds here.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Security Audit Trail Tab -->
+      <div id="tab-audit" class="tab-content">
+        <div id="audit-feed" class="feed-container">
+          <div class="empty-state">
+            <span class="empty-icon">📜</span>
+            <span>Security audit logs will record every AI query and safety evaluation.</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- ═══ BOTTOM ACTION BAR ═══ -->
+  <footer id="bottombar">
+    <div class="action-wrap">
+      <button id="btn-simulate" class="btn-primary-action">
+        <span class="pulse-ring"></span>
+        <span class="btn-icon">⚡</span>
+        <span class="btn-text">Simulate Real Incident (Break Checkout & Watch AI Fix It)</span>
+      </button>
+      <span class="action-hint">Click this button to see the AI autonomously resolve a live production outage.</span>
+    </div>
+
+    <div class="status-summary-tag">
+      <span id="bottom-phase">Ready to demo</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

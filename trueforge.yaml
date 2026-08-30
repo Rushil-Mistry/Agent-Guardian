@@ -1,0 +1,93 @@
+# TrueForge Agent Harness Configuration
+# Agent Guardian — Autonomous SRE Incident Response Agent
+
+version: "1.0"
+agent:
+  name: "agent-guardian"
+  description: "Autonomous SRE incident-response agent that investigates alerts, gathers evidence via MCP tools, runs diagnostic code in TrueForge sandboxes, and enforces human approval for production remediation."
+  version: "1.0.0"
+  model:
+    provider: "openai"
+    name: "gpt-4o"
+    temperature: 0.1
+
+runtime:
+  type: "harness"
+  max_iterations: 15
+  timeout_seconds: 600
+  kill_switch:
+    enabled: true
+    state_file: ".agent-guardian-state.json"
+
+# Model Context Protocol (MCP) Tool Servers
+tools:
+  mcp_servers:
+    - name: "monitoring"
+      transport: "http"
+      url: "http://localhost:3001/mcp"
+      health_check: "http://localhost:3001/health"
+      read_only: true
+      description: "Service metrics, error rates, latencies, and active alerts"
+
+    - name: "logs"
+      transport: "http"
+      url: "http://localhost:3002/mcp"
+      health_check: "http://localhost:3002/health"
+      read_only: true
+      description: "Application log search, error traces, and recent stack traces"
+
+    - name: "github"
+      transport: "http"
+      url: "http://localhost:3003/mcp"
+      health_check: "http://localhost:3003/health"
+      read_only: false
+      description: "Git commits, diff inspection, branch creation, and bugfix patches"
+
+    - name: "database"
+      transport: "http"
+      url: "http://localhost:3004/mcp"
+      health_check: "http://localhost:3004/health"
+      read_only: true
+      guard: "SQL_READ_ONLY_GUARD"
+      description: "Database schema inspection and read-only diagnostic SQL queries"
+
+    - name: "deployment"
+      transport: "http"
+      url: "http://localhost:3005/mcp"
+      health_check: "http://localhost:3005/health"
+      read_only: false
+      policy_gated: true
+      description: "Service deployment status, rollback, restart, and version deploy"
+
+# TrueForge Sandbox Execution Environment
+sandbox:
+  provider: "trueforge-sandbox"
+  environment: "isolated-container"
+  image: "python:3.11-slim"
+  memory_limit: "512MB"
+  cpu_limit: "1.0"
+  network_access: false
+  secret_scrubbing: true
+  timeout_seconds: 30
+
+# Safety & Human-In-The-Loop Governance
+safety:
+  policy_engine:
+    package: "@agent-guardian/policy-engine"
+    policy_file: "packages/policy-engine/policies/default.yaml"
+    mode: "fail_closed"
+
+  risk_engine:
+    auto_classify: true
+    levels: ["low", "medium", "high", "critical"]
+
+  audit_trail:
+    package: "@agent-guardian/audit"
+    append_only: true
+    scrub_secrets: true
+
+  human_in_the_loop:
+    required_for_risk_levels: ["high"]
+    blocked_risk_levels: ["critical"]
+    timeout_minutes: 30
+    default_on_timeout: "deny"

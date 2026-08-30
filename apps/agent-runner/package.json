@@ -1,0 +1,24 @@
+{
+  "name": "@agent-guardian/agent-runner",
+  "version": "1.0.0",
+  "description": "TrueForge autonomous agent harness runner for Agent Guardian",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/simulate-incident.ts",
+    "simulate": "tsx src/simulate-incident.ts"
+  },
+  "dependencies": {
+    "@agent-guardian/audit": "workspace:*",
+    "@agent-guardian/domain": "workspace:*",
+    "@agent-guardian/kill-switch": "workspace:*",
+    "@agent-guardian/policy-engine": "workspace:*",
+    "@agent-guardian/shared": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.26.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.9.3"
+  }
+}

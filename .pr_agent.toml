@@ -1,0 +1,57 @@
+# Qodo Merge (formerly PR-Agent) Configuration for Agent Guardian
+# https://github.com/Codium-ai/pr-agent
+
+[config]
+model = "gpt-4o"
+fallback_models = ["gpt-4o-mini"]
+verbosity_level = 1
+response_language = "en-US"
+
+[pr_reviewer]
+# Run automated code review on PR creation and updates
+enable_auto_review = true
+require_focused = true
+require_score_review = true
+require_tests_review = true
+require_security_review = true
+require_can_be_split_review = false
+num_code_suggestions = 5
+enable_help_text = true
+
+# Custom instructions enforcing Agent Guardian safety and architecture rules
+extra_instructions = """
+You are reviewing code for Agent Guardian, a modular autonomous incident-response agent.
+Enforce the following strict rules:
+1. Zero Dependencies in `packages/domain`: The domain package must only contain pure TypeScript types and guards. No external dependencies (Express, Fastify, MCP SDK, database clients).
+2. Fail-Closed Policy: The policy engine must always fail-closed (`allowed: false`) on errors or unknown rules.
+3. Secret Redaction: Ensure no secret-shaped values (API keys, tokens, passwords) can leak into audit logs or prompt outputs.
+4. Kill-Switch Idempotency: Ensure the kill switch handles multiple invocations cleanly without race conditions or uncaught errors.
+5. Unit Testing: Any changes or additions to safety engines, policies, audit, or kill switch MUST have corresponding Vitest unit tests.
+"""
+
+[pr_description]
+publish_labels = true
+publish_description_as_comment = false
+add_custom_labels = ["safety-domain", "policy-engine", "mcp-adapter", "trueforge", "needs-tests"]
+generate_ai_title = true
+enable_pr_type = true
+extra_instructions = """
+Highlight whether the PR touches safety-critical packages (`packages/domain`, `packages/policy-engine`, `packages/audit`, `packages/kill-switch`).
+"""
+
+[pr_code_suggestions]
+commitable_code_suggestions = true
+num_code_suggestions = 4
+extra_instructions = """
+Focus suggestions on security, error handling, strict type safety, edge-case testing, and performance.
+"""
+
+[pr_test]
+enable_auto_test = true
+testing_framework = "vitest"
+extra_instructions = """
+Generate tests compatible with Vitest (`packages/*/src/__tests__/*.test.ts`). Ensure high branch coverage on policy decisions and risk classifications.
+"""
+
+[pr_security]
+enable_security_scan = true

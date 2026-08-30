@@ -8,12 +8,43 @@ importers:
 
   .:
     devDependencies:
+      '@types/node':
+        specifier: ^22.20.1
+        version: 22.20.1
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
       vitest:
         specifier: ^4.1.11
         version: 4.1.11(@types/node@22.20.1)(vite@8.2.2(@types/node@22.20.1)(esbuild@0.28.2)(tsx@4.23.12))
+
+  apps/agent-runner:
+    dependencies:
+      '@agent-guardian/audit':
+        specifier: workspace:*
+        version: link:../../packages/audit
+      '@agent-guardian/domain':
+        specifier: workspace:*
+        version: link:../../packages/domain
+      '@agent-guardian/kill-switch':
+        specifier: workspace:*
+        version: link:../../packages/kill-switch
+      '@agent-guardian/policy-engine':
+        specifier: workspace:*
+        version: link:../../packages/policy-engine
+      '@agent-guardian/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+      '@modelcontextprotocol/sdk':
+        specifier: ^1.26.0
+        version: 1.30.0(zod@3.25.76)
+    devDependencies:
+      tsx:
+        specifier: ^4.19.0
+        version: 4.23.12
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
   packages/audit:
     dependencies:
@@ -190,6 +221,9 @@ importers:
       '@types/js-yaml':
         specifier: ^4.0.9
         version: 4.0.9
+      '@types/node':
+        specifier: ^22.20.1
+        version: 22.20.1
 
   packages/shared:
     devDependencies:
